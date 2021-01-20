@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 
 function EmployeeList({ list, sortEmployeeName }) {
   return (
-    <Table striped border hover>
+    <Table>
       <thead className="text-center">
         <tr>
           <th>Photo</th>

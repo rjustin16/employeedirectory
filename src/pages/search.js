@@ -4,13 +4,13 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import EmployeeList from "./Emplist";
+import EmployeeList from "../pages/Emplist";
 
 class Search extends React.Component {
   state = {
     employees: [],
-    employeeArray: [],
-    filteredEmployees: [],
+    empArray: [],
+    searchEmp: [],
     search: "",
     sort: "",
   };
@@ -32,18 +32,15 @@ class Search extends React.Component {
   sortEmployeeName = (e) => {
     e.preventDefault();
 
-    // take current state
-    let { employees, sort, employeeArray } = this.state;
+    let { employees, sort, empArray } = this.state;
 
-    // if array is not sorted, sort by name
     !sort
-      ? (employeeArray = employees.sort((a, b) =>
+      ? (empArray = employees.sort((a, b) =>
           a.name.first > b.name.first ? 1 : -1
         ))
-      : (employeeArray = employees.reverse());
+      : (empArray = employees.reverse());
 
-    // new state with sorted data
-    this.setState({ employees: employeeArray, sort: !sort });
+    this.setState({ employees: empArray, sort: !sort });
   };
 
   handleSearchQuery = (e) => {
@@ -54,28 +51,27 @@ class Search extends React.Component {
       return values.indexOf(filter.toLowerCase()) !== -1;
     });
 
-    this.setState({ filteredEmployees: filterList });
+    this.setState({ searchEmp: filterList });
   };
 
   render() {
     console.log(this.state);
     return (
       <div className="Search">
-        <Navbar bg="dark" variant="dark">
+        <Navbar>
           <Navbar.Brand href="#home">Employee Directory</Navbar.Brand>
           <Nav className="mr-auto"></Nav>
           <Form inline>
             <Form.Control
-              // value={this.state.search}
               type="text"
               placeholder="Search for Employee"
               name="search"
               onChange={(e) => this.handleSearchQuery(e)}
             />
-            <Button variant="outline-light">Search</Button>
+            <Button>Search</Button>
           </Form>
         </Navbar>
-        <EmployeeList list={this.state.filteredEmployees} />
+        <EmployeeList list={this.state.searchEmp} />
       </div>
     );
   }

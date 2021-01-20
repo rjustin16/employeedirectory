@@ -1,6 +1,6 @@
 import "./App.css";
 import Container from "./components/container";
-import Search from "./components/search";
+import Search from "./pages/search";
 
 
 function App (){
