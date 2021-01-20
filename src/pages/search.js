@@ -20,7 +20,7 @@ class Search extends React.Component {
   }
 
   async getEmployees() {
-    await fetch("https://randomuser.me/api/?results=20&nat=us")
+     fetch("https://randomuser.me/api/?results=20&nat=us")
       .then((data) => data.json())
       .then((data) =>
         this.setState({
